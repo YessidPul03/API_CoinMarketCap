@@ -10,7 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class CryptoService {
  
-  private apiUrl = 'http://localhost:8000/cryptos'; // URL base del backend
+  // private apiUrl = 'http://localhost:8000/cryptos'; // URL base del backend
+  private apiUrl = 'https://api-coinmarketcap.onrender.com/cryptos'; // URL base del backend PRODUCCION
 
   constructor(private http: HttpClient) { }
 
