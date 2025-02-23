@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ crypto.name }} ({{ crypto.symbol.toUpperCase() }})</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleJsonView()">
+        <ion-icon slot="icon-only" name="code-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-container *ngIf="!showJson">
+    <!-- Información General -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>🔍 Información General</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>ID:</strong> {{ crypto.id }}</p>
+        <p><strong>Slug:</strong> {{ crypto.slug }}</p>
+        <p><strong>Ranking:</strong> #{{ crypto.cmc_rank }}</p>
+        <p>
+          <strong>Fecha de inclusión:</strong> {{ crypto.date_added | date }}
+        </p>
+        <p>
+          <strong>Última actualización:</strong> {{ crypto.last_updated |
+          date:'medium' }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Suministro -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>📦 Suministro</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          <strong>Suministro circulante:</strong> {{ crypto.circulating_supply |
+          number }}
+        </p>
+        <p>
+          <strong>Suministro total:</strong> {{ crypto.total_supply | number }}
+        </p>
+        <p>
+          <strong>Suministro máximo:</strong> {{ crypto.max_supply | number }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Datos del Mercado -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>💰 Datos del Mercado (USD)</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          <strong>Precio actual:</strong> ${{ crypto.quote.USD.price |
+          number:'1.4-4' }}
+        </p>
+        <p>
+          <strong>Volumen 24h:</strong> ${{ crypto.quote.USD.volume_24h |
+          number:'1.2-2' }}
+        </p>
+        <p>
+          <strong>Cambio 1h:</strong> {{ crypto.quote.USD.percent_change_1h |
+          number:'1.2-2' }}%
+        </p>
+        <p>
+          <strong>Cambio 24h:</strong> {{ crypto.quote.USD.percent_change_24h |
+          number:'1.2-2' }}%
+        </p>
+        <p>
+          <strong>Cambio 7d:</strong> {{ crypto.quote.USD.percent_change_7d |
+          number:'1.2-2' }}%
+        </p>
+        <p>
+          <strong>Capitalización de mercado:</strong> ${{
+          crypto.quote.USD.market_cap | number:'1.2-2' }}
+        </p>
+        <p>
+          <strong>Dominancia de mercado:</strong> {{
+          crypto.quote.USD.market_cap_dominance }}%
+        </p>
+        <p>
+          <strong>Capitalización total:</strong> ${{
+          crypto.quote.USD.fully_diluted_market_cap | number:'1.2-2' }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Etiquetas -->
+    <ion-card *ngIf="crypto.tags?.length">
+      <ion-card-header>
+        <ion-card-title>🏷️ Etiquetas</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="tags-container">
+        <ion-chip color="secondary" *ngFor="let tag of crypto.tags">
+          <ion-label>{{ tag }}</ion-label>
+        </ion-chip>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <!-- Vista JSON -->
+  <ng-container *ngIf="showJson">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>📝 Vista en JSON</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <pre>{{ crypto | json }}</pre>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>

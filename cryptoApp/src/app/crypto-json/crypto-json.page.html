@@ -1,0 +1,20 @@
+<ion-content class="ion-padding">
+  <!-- Botón de retorno visible -->
+  <ion-button
+    fill="clear"
+    color="primary"
+    [routerLink]="['/']"
+    class="return-btn"
+  >
+    <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+    Volver
+  </ion-button>
+  <ion-card class="crypto-card" *ngIf="crypto">
+    <ion-card-header>
+      <ion-card-title class="title">📝 Datos en JSON</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <pre>{{ crypto | json }}</pre>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

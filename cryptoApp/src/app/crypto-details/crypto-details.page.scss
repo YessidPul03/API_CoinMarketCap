@@ -1,0 +1,35 @@
+ion-card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  ion-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  ion-card-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  p {
+    font-size: 0.95rem;
+    margin: 5px 0;
+  }
+  
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  ion-chip {
+    font-size: 0.85rem;
+  }
+  
+  ion-content {
+    --background: #f7f9fc;
+  }
+  

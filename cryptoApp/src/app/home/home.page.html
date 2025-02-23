@@ -1,0 +1,52 @@
+<ion-content class="ion-padding">
+  <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+    <h2 class="text-center mb-4 style">📊 Información de Criptomonedas</h2>
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Símbolo</th>
+          <th>Precio (USD)</th>
+          <th>Cambio 24h (%)</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let crypto of cryptos; let i = index">
+          <td>{{ crypto.id }}</td>
+          <td>{{ crypto.name }}</td>
+          <td>{{ crypto.symbol.toUpperCase() }}</td>
+          <td>${{ crypto.quote.USD.price | number: '1.2-5' }}</td>
+          <td
+            [ngClass]="{'text-success': crypto.quote.USD.percent_change_24h >= 0, 'text-danger': crypto.quote.USD.percent_change_24h < 0}"
+          >
+            {{ crypto.quote.USD.percent_change_24h | number: '1.2-2' }}%
+          </td>
+          <td class="text-center">
+            <!-- Detalles -->
+            <ion-button
+              color="primary"
+              size="small"
+              (click)="viewDetails(crypto.id)"
+            >
+              <ion-icon
+                slot="icon-only"
+                name="information-circle-outline"
+              ></ion-icon>
+            </ion-button>
+
+            <!-- JSON Directo -->
+            <ion-button
+              color="medium"
+              size="small"
+              [routerLink]="['/crypto', crypto.id]"
+            >
+              <ion-icon slot="icon-only" name="code-outline"></ion-icon>
+            </ion-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>
